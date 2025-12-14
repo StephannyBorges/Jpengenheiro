@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Pedro Torres | Engenharia Civil</title>
+    <style>
+        /* --- ESTILOS GERAIS (CSS) --- */
+        :root {
+            --primary-color: #003366; /* Azul Engenharia */
+            --secondary-color: #ffcc00; /* Amarelo Segurança/Destaque */
+            --text-color: #333;
+            --light-bg: #f4f4f4;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+            transition: 0.3s;
+        }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920&auto=format&fit=crop'); /* Imagem de fundo genérica de arquitetura */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        section {
+            padding: 80px 5%;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- SOBRE --- */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: justify;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+        
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- SERVIÇOS --- */
+        #services {
+            background: var(--light-bg);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* --- PORTFÓLIO --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 250px;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 51, 102, 0.9);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        /* --- CONTATO --- */
+        #contact {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        #contact h2 {
+            color: var(--white);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        form {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            color: var(--text-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* --- RODAPÉ --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #002244;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade Mobile */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2rem; }
+            nav { display: none; } /* Em um site real, aqui iria um menu hambúrguer */
+            .logo { margin: 0 auto; border: none; }
+            header { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">JOÃO PEDRO TORRES</div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#portfolio">Projetos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <h1>Engenharia com Precisão e Excelência</h1>
+        <p>Soluções completas em projetos, cálculo estrutural e gestão de obras.</p>
+        <a href="#contact" class="btn">Solicitar Orçamento</a>
+    </section>
+
+    <section id="about">
+        <h2>Sobre Mim</h2>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="https://placehold.co/400x400/003366/FFF?text=Foto+do+Jo%C3%A3o" alt="João Pedro Torres">
+            </div>
+            <div class="about-text">
+                <p><strong>João Pedro Torres</strong>, Engenheiro Civil.</p>
+                <br>
+                <p>Com vasta experiência no mercado da construção civil, atuo transformando ideias em estruturas seguras e funcionais. Minha abordagem une técnica apurada, respeito às normas vigentes e compromisso com os prazos.</p>
+                <br>
+                <p>Especialista em gestão de obras e cálculo estrutural, busco sempre a melhor relação custo-benefício para meus clientes, sem abrir mão da qualidade.</p>
+                <br>
+                <p><strong>CREA:</strong> 123456-7 (Exemplo)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Meus Serviços</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3>Projetos Estruturais</h3>
+                <p>Cálculos precisos para garantir a estabilidade e segurança da sua edificação.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Gerenciamento de Obras</h3>
+                <p>Acompanhamento técnico, controle de cronograma e gestão de custos.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Reformas & Laudos</h3>
+                <p>Execução de reformas residenciais e emissão de laudos técnicos de engenharia.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <h2>Obras Recentes</h2>
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <img src="https://placehold.co/600x400/EEE/333?text=Edificio+Residencial" alt="Projeto 1">
+                <div class="project-overlay">
+                    <h3>Edifício Residencial Alpha</h3>
+                    <p>Gestão completa da obra</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x400/EEE/333?text=Reforma+Comercial" alt="Projeto 2">
+                <div class="project-overlay">
+                    <h3>Centro Comercial Beta</h3>
+                    <p>Projeto Estrutural e Reforma</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://placehold.co/600x400/EEE/333?text=Casa+de+Alto+Padrao" alt="Projeto 3">
+                <div class="project-overlay">
+                    <h3>Residência Lago</h3>
+                    <p>Consultoria e Execução</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Entre em Contato</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>📍 Escritório: Av. Central, 1000 - Centro</p>
+                <p>📞 Telefone: (11) 99999-9999</p>
+                <p>✉️ Email: contato@joaopedrotorres.eng.br</p>
+                <p>💼 LinkedIn: /in/joaopedrotorres</p>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label>Nome:</label>
+                    <input type="text" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" placeholder="Seu email">
+                </div>
+                <div class="form-group">
+                    <label>Mensagem:</label>
+                    <textarea rows="5" placeholder="Como posso ajudar?"></textarea>
+                </div>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 João Pedro Torres Engenharia. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
